@@ -1,0 +1,101 @@
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+public class ShopFXLogin extends Application {
+
+    @Override
+    public void start(Stage stage) {
+
+        // ======= CONTENEDOR PRINCIPAL =======
+        VBox root = new VBox(20);
+        root.setAlignment(Pos.TOP_CENTER);
+        root.setPadding(new Insets(40, 20, 20, 20));
+        root.setStyle("-fx-background-color: #FFF8F3;");
+
+        // ======= LOGO =======
+        ImageView logo = new ImageView(new Image("file:logo.png")); 
+        logo.setFitWidth(130);
+        logo.setFitHeight(130);
+
+        // ======= TEXTO ShopFX =======
+        Label titulo = new Label("ShopFX");
+        titulo.setFont(Font.font("Arial", 45));
+        titulo.setTextFill(Color.web("#0A1A33"));
+
+        // ======= TARJETA BLANCA =======
+        VBox card = new VBox(20);
+        card.setAlignment(Pos.CENTER_LEFT);
+        card.setPadding(new Insets(30));
+        card.setPrefWidth(330);
+        card.setStyle("-fx-background-color: white; -fx-background-radius: 25;");
+
+        // ======= TÍTULO DENTRO DE LA TARJETA =======
+        Label bienvenida = new Label("Bienvenido a ShopFX");
+        bienvenida.setFont(Font.font("Arial", 20));
+        bienvenida.setTextFill(Color.web("#0A1A33"));
+
+        // ======= CAMPO CORREO =======
+        Label lblCorreo = new Label("Correo electrónico");
+        lblCorreo.setTextFill(Color.web("#0A1A33"));
+
+        TextField txtCorreo = new TextField();
+        txtCorreo.setPromptText("Escribe tu correo");
+        txtCorreo.setPrefWidth(260);
+        txtCorreo.setStyle("-fx-background-color: transparent; -fx-border-color: #0A1A33; -fx-border-width: 0 0 2 0;");
+
+        // ======= CAMPO CONTRASEÑA =======
+        Label lblPass = new Label("Contraseña");
+        lblPass.setTextFill(Color.web("#0A1A33"));
+
+        PasswordField txtPass = new PasswordField();
+        txtPass.setPromptText("Escribe tu contraseña");
+        txtPass.setPrefWidth(260);
+        txtPass.setStyle("-fx-background-color: transparent; -fx-border-color: #0A1A33; -fx-border-width: 0 0 2 0;");
+
+        // ======= BOTÓN AMARILLO =======
+        Button btnLogin = new Button("iniciar sesión");
+        btnLogin.setPrefWidth(250);
+        btnLogin.setPrefHeight(45);
+        btnLogin.setStyle("-fx-background-color: #FFF95B; -fx-background-radius: 30; -fx-font-size: 18;");
+
+        btnLogin.setOnAction(e -> {
+            System.out.println("Correo: " + txtCorreo.getText());
+            System.out.println("Contraseña: " + txtPass.getText());
+        });
+
+        // ======= TEXTO OLVIDAR =======
+        Label olvidar = new Label("¿Olvidaste la contraseña?");
+        olvidar.setTextFill(Color.GRAY);
+        olvidar.setFont(Font.font(13));
+
+        // Agregar todo dentro de la tarjeta
+        card.getChildren().addAll(
+                bienvenida,
+                lblCorreo, txtCorreo,
+                lblPass, txtPass,
+                btnLogin,
+                olvidar
+        );
+
+        // Agregar todo al contenedor principal
+        root.getChildren().addAll(logo, titulo, card);
+
+        Scene scene = new Scene(root, 400, 700);
+        stage.setScene(scene);
+        stage.setTitle("ShopFX - Login");
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
