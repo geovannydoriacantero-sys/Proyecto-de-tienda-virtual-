@@ -13,12 +13,15 @@ import javafx.stage.Stage;
 public class ShopFXLogin extends Application {
 
     @Override
-    public void start(Stage stage) 
+    public void start(Stage stage) {
+
         stage.getIcons().add(new Image("file:logo.png"));
+
         VBox root = new VBox(20);
         root.setAlignment(Pos.TOP_CENTER);
         root.setPadding(new Insets(40, 20, 20, 20));
         root.setStyle("-fx-background-color: #FFF8F3;");
+
         ImageView logo = new ImageView(new Image("file:logo.png"));
         logo.setFitWidth(130);
         logo.setFitHeight(130);
@@ -32,6 +35,7 @@ public class ShopFXLogin extends Application {
         card.setPadding(new Insets(30));
         card.setPrefWidth(330);
         card.setStyle("-fx-background-color: white; -fx-background-radius: 25;");
+
         Label bienvenida = new Label("Bienvenido a ShopFX");
         bienvenida.setFont(Font.font("Arial", 20));
         bienvenida.setTextFill(Color.web("#0A1A33"));
@@ -48,40 +52,50 @@ public class ShopFXLogin extends Application {
         txtPass.setStyle("-fx-background-color: transparent; -fx-border-color: #0A1A33; -fx-border-width: 0 0 2 0;");
         txtPass.setPrefWidth(260);
 
-        // ======= LABEL DE ERRORES =======
         Label errorMsg = new Label("");
         errorMsg.setTextFill(Color.RED);
         errorMsg.setFont(Font.font(12));
 
-        // ======= BOTÓN LOGIN =======
         Button btnLogin = new Button("iniciar sesión");
         btnLogin.setPrefWidth(250);
         btnLogin.setPrefHeight(45);
-        btnLogin.setStyle("-fx-background-color: #FFF95B; -fx-background-radius: 30; -fx-font-size: 18;")
+        btnLogin.setStyle("-fx-background-color: #FFF95B; -fx-background-radius: 30; -fx-font-size: 18;");
         btnLogin.setOnAction(e -> {
 
             String correo = txtCorreo.getText();
             String pass = txtPass.getText();
-
             if (correo.isEmpty() || pass.isEmpty()) {
                 errorMsg.setText("⚠️ Debes llenar todos los campos.");
                 return;
             }
-
-            if (!correo.contains("@")) {
-                errorMsg.setText("⚠️ Correo inválido.");
+            if (!correo.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+                errorMsg.setText("⚠️ Correo inválido. Ej: usuario@gmail.com");
                 return;
             }
 
-            errorMsg.setText(""); // SI TODO ESTÁ BIEN, BORRAMOS ERRORES
+            // Longitud mínima de la contraseña
+            if (pass.length() < 6) {
+                errorMsg.setText("⚠️ La contraseña debe tener mínimo 6 caracteres.");
+                return;
+            }
 
+            errorMsg.setText("");
+
+            // Mensaje en consola
             System.out.println("Inicio exitoso");
             System.out.println("Correo: " + correo);
             System.out.println("Contraseña: " + pass);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Login exitoso");
+            alert.setHeaderText(null);
+            alert.setContentText("Bienvenido a ShopFX, " + correo + "!");
+            alert.show();
         });
+
         Label olvidar = new Label("¿Olvidaste la contraseña?");
         olvidar.setTextFill(Color.GRAY);
         olvidar.setFont(Font.font(13));
+
         card.getChildren().addAll(
                 bienvenida,
                 lblCorreo, txtCorreo,
@@ -92,6 +106,7 @@ public class ShopFXLogin extends Application {
         );
 
         root.getChildren().addAll(logo, titulo, card);
+
         Scene scene = new Scene(root, 400, 700);
         stage.setScene(scene);
         stage.setTitle("ShopFX - Login");
