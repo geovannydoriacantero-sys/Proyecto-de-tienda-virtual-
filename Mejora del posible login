@@ -19,7 +19,7 @@ public class ShopFXLogin extends Application {
 
         VBox root = new VBox(20);
         root.setAlignment(Pos.TOP_CENTER);
-        root.setPadding(new Insets(40, 20, 20, 20));
+        root.setPadding(new Insets(45, 20, 20, 20));
         root.setStyle("-fx-background-color: #FFF8F3;");
 
         ImageView logo = new ImageView(new Image("file:logo.png"));
