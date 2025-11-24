@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladorvista.LoginControlador">
+   <children>
+      <Pane prefHeight="489.0" prefWidth="685.0" style="-fx-background-color: #FAF6EB;">
+         <children>
+            <ImageView fitHeight="96.0" fitWidth="106.0" layoutX="191.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="298.0" layoutY="47.0" prefHeight="56.0" prefWidth="166.0" text="Shop GM">
+               <font>
+                  <Font name="Segoe UI Semibold" size="35.0" />
+               </font>
+            </Label>
+            <Button fx:id="botonInicioSesion1" layoutX="265.0" layoutY="375.0" mnemonicParsing="false" onAction="#mostrarPanelInicioSesion" prefHeight="37.0" prefWidth="156.0" style="-fx-background-color: #FCF181; -fx-background-radius: 24px; -fx-border-radius: 24px;" text="iniciar sesión">
+               <font>
+                  <Font name="Segoe UI Semibold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="botonRegistro" layoutX="361.0" layoutY="439.0" mnemonicParsing="false" onAction="#mostrarPanelRegistro" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: transparent;" text="registrate." textFill="#eb7763">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="label1" layoutX="246.0" layoutY="444.0" text="¿No tienes cuenta?">
+               <font>
+                  <Font name="Segoe UI Semibold" size="14.0" />
+               </font>
+            </Label>
+            <Pane fx:id="panelInicioSesion" layoutX="81.0" layoutY="154.0" opacity="0.9" prefHeight="320.0" prefWidth="544.0" style="-fx-background-color: #F2F5FC; -fx-background-radius: 34px; -fx-border-radius: 34px;" visible="false">
+               <children>
+                  <Label layoutX="153.0" layoutY="23.0" text="Bienvenido a Shop GM">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="98.0" layoutY="85.0" text="Correo eléctronico">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="98.0" layoutY="161.0" text="Contraseña">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fieldCorreo" layoutX="98.0" layoutY="108.0" prefHeight="31.0" prefWidth="346.0" style="-fx-border-color: transparent transparent #000000 transparent; -fx-border-width: 0 0 1 0; -fx-background-color: transparent;">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="15.0" />
+                     </font></TextField>
+                  <PasswordField fx:id="fieldContrasena" layoutX="98.0" layoutY="184.0" prefHeight="31.0" prefWidth="346.0" style="-fx-border-color: transparent transparent #000000 transparent; -fx-border-width: 0 0 1 0; -fx-background-color: transparent;">
+                     <font>
+                        <Font size="15.0" />
+                     </font></PasswordField>
+                  <Button fx:id="botonInicioSesion2" layoutX="207.0" layoutY="236.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="40.0" prefWidth="128.0" style="-fx-background-color: #FCF181; -fx-background-radius: 24px; -fx-border-radius: 24px;" text="iniciar sesión">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="17.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="189.0" layoutY="291.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="166.0" style="-fx-background-color: transparent;" text="¿Olvidaste la contraseña?">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="botonRegresoInicio" contentDisplay="GRAPHIC_ONLY" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#regresarInicioSesion" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" scaleX="-1.0">
+                           <image>
+                              <Image url="@../images/logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="panelRegistro" layoutX="82.0" layoutY="154.0" opacity="0.9" prefHeight="329.0" prefWidth="544.0" style="-fx-background-color: #F2F5FC; -fx-background-radius: 34px; -fx-border-radius: 34px;" visible="false">
+               <children>
+                  <Label layoutX="100.0" layoutY="76.0" text="Nombre">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="100.0" layoutY="135.0" text="Correo eléctronico">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="99.0" layoutY="190.0" text="Contraseña">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fieldNombreRegistro" layoutX="100.0" layoutY="95.0" prefHeight="32.0" prefWidth="320.0" style="-fx-border-color: transparent transparent #000000 transparent; -fx-border-width: 0 0 1 0; -fx-background-color: transparent;">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="15.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="fieldCorreoRegistro" layoutX="100.0" layoutY="154.0" prefHeight="32.0" prefWidth="320.0" style="-fx-border-color: transparent transparent #000000 transparent; -fx-border-width: 0 0 1 0; -fx-background-color: transparent;">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="15.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField fx:id="fieldContrasenaRegistro" layoutX="100.0" layoutY="209.0" prefWidth="320.0" style="-fx-border-color: transparent transparent #000000 transparent; -fx-border-width: 0 0 1 0; -fx-background-color: transparent;">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </PasswordField>
+                  <Button fx:id="botonRegistro2" layoutX="203.0" layoutY="264.0" mnemonicParsing="false" onAction="#registrarse" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #FCF181; -fx-background-radius: 24px; -fx-border-radius: 24px;" text="Registrarse">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="21.0" layoutY="9.0" mnemonicParsing="false" onAction="#regresarRegistro" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" scaleX="-1.0">
+                           <image>
+                              <Image url="@../images/logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Label layoutX="130.0" layoutY="14.0" text="Bienvenido a Shop GM">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="23.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
