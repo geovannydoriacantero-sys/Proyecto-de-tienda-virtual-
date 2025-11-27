@@ -24,3 +24,5 @@ Interfaz gráfica (JavaFX)
 - Navegación entre vistas
 - Incluye imágenes y recursos necesarios
 -  Estructura del proyecto
+
+realizado por maicol Stiven Nuñez mora y Geovanny de Jesús Doria Cantero 
