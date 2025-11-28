@@ -25,4 +25,4 @@ Interfaz gráfica (JavaFX)
 - Incluye imágenes y recursos necesarios
 -  Estructura del proyecto
 
-realizado por maicol Stiven Nuñez mora y Geovanny de Jesús Doria Cantero 
+realizado por maicol Stiven Nuñez mora id: 1067163570 y Geovanny de Jesús Doria Cantero id: 1067162431
