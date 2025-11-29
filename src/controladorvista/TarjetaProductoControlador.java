@@ -88,17 +88,9 @@ public class TarjetaProductoControlador implements Initializable {
     public void ponerEnNoDeseado() {
         botonDeseado.setGraphic(new ImageView(new Image(getClass().getResource("/images/hearth_black.png").toExternalForm(), 20, 20, true, true)));
     }
-    
-    public void ponerEnCarrito() {
-        botonCarrito.setGraphic(new ImageView(new Image(getClass().getResource("/images/shoppingcar_red.png").toExternalForm(), 20, 20, true, true)));
-    }
 
-    public void ponerEnNoCarrito() {
-        botonCarrito.setGraphic(new ImageView(new Image(getClass().getResource("/images/shoppingcar_black.png").toExternalForm(), 20, 20, true, true)));
-    }
-    
     @FXML
-    protected void agregarADeseados(ActionEvent event) {
+    private void agregarADeseados(ActionEvent event) {
         if (usuario.agregarADeseados(producto)) {
             usuarioAdmin.guardarUsuarios(listaUsuarios);
             botonDeseado.setGraphic(new ImageView(new Image(getClass().getResource("/images/hearth_red.png").toExternalForm(), 20, 20, true, true)));
@@ -110,17 +102,20 @@ public class TarjetaProductoControlador implements Initializable {
                 menuC.mostrarProductosDeseados(menuC.getContenedorDeseados());
                 menuC.cargarDeseados();
             }
+
         }
+
     }
 
     @FXML
-    protected void agregarACarrito(ActionEvent event) {
+    private void agregarACarrito(ActionEvent event) {
         if (usuario.agregarACarrito(producto)) {
+
             usuarioAdmin.guardarUsuarios(listaUsuarios);
-            botonCarrito.setGraphic(new ImageView(new Image(getClass().getResource("/images/shoppingcar_red.png").toExternalForm(), 20, 20, true, true)));
+
+            System.out.println("Producto agregado y guardado");
         } else {
-            botonCarrito.setGraphic(new ImageView(new Image(getClass().getResource("/images/shoppingcar_black.png").toExternalForm(), 20, 20, true, true)));
-            usuarioAdmin.guardarUsuarios(listaUsuarios);
+            System.out.println("Este producto ya está en carrito");
         }
 
     }

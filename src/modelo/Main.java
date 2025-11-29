@@ -13,8 +13,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import tienda.ListaProducto;
 import tienda.ListaUsuario;
 import tienda.ProductoAdministrador;
 import tienda.UsuarioAdministrador;
@@ -22,6 +22,7 @@ import tienda.UsuarioAdministrador;
 public class Main extends Application {
 
     private static ListaUsuario listaUsuarios = new ListaUsuario();
+    private static ListaProducto catalogo = new ListaProducto();
     private static ProductoAdministrador productoAdministrador = new ProductoAdministrador();
     private static UsuarioAdministrador usuarioAdministrador = new UsuarioAdministrador();
 
@@ -33,7 +34,7 @@ public class Main extends Application {
         mainStage = stage;
         logo = new Image(getClass().getResourceAsStream("/images/logo.png"));
 
-        productoAdministrador.cargarProductos();
+        catalogo = productoAdministrador.cargarProductos();
         listaUsuarios = usuarioAdministrador.cargarUsuarios(productoAdministrador);
 
         FXMLLoader loader = abrirVentana("/vista/Login.fxml");
@@ -75,7 +76,7 @@ public class Main extends Application {
         Label label = new Label(mensaje);
         label.setWrapText(true);
         label.setMaxWidth(350);
-        label.setFont(Font.font("Segoe UI SemiBold", 15));
+        label.setStyle("-fx-font-size: 16px; -fx-font-family: 'Segoe UI Bold';");
 
         alert.getDialogPane().setContent(label);
         DialogPane dialogPane = alert.getDialogPane();
@@ -89,8 +90,13 @@ public class Main extends Application {
                 + "-fx-border-radius: 24px;"
         );
 
-        dialogPane.setStyle("color: #FAF6EB;");
+        dialogPane.setStyle(
+                "-fx-background-color: #FAF6EB;"
+                + "-fx-border-radius: 24px;"
+                + "-fx-background-radius: 24px;"
+        );
 
         alert.showAndWait();
     }
+
 }

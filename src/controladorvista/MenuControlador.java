@@ -17,6 +17,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
@@ -91,7 +92,6 @@ public class MenuControlador implements Initializable {
             mostrarProductosPorCategoria(contenedorCatalogo);
             mostrarProductosCarrito();
             cargarDeseados();
-            cargarCarritos();
         } catch (IOException ex) {
         }
         panelCatalogo.setVisible(true);
@@ -103,9 +103,8 @@ public class MenuControlador implements Initializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
         cargarNombreUsuario();
-
-        if ("admin10@gmail.com".equals(usuario.getUserCorreo())
-                && "admin2025".equals(usuario.getContrasena())) {
+        
+        if (usuario.getUserCorreo().equals("admin10@gmail.com") && usuario.getContrasena().equals("admin2025")) {
             modoAdmin();
         } else {
             modoUsuario();
@@ -127,6 +126,8 @@ public class MenuControlador implements Initializable {
     private boolean menuAbierto = false;
 
     @FXML
+    private AnchorPane anchorPane;
+    @FXML
     private Pane panelCatalogo;
     @FXML
     private Pane panelDeseados;
@@ -145,6 +146,8 @@ public class MenuControlador implements Initializable {
     private Button botonHistorial;
     @FXML
     private Button botonCarrito;
+    @FXML
+    private Button botonPagar;
 
     @FXML
     private VBox menuDesplegable;
@@ -154,8 +157,13 @@ public class MenuControlador implements Initializable {
     @FXML
     private Button boton1_mlateral;
     @FXML
+    private Button boton2_mlateral;
+    @FXML
     private Button boton3_mlateral;
-
+    @FXML
+    private Button botonMenu;
+    @FXML
+    private Button botonMenu2;
     @FXML
     private Rectangle fondoOscuro;
 
@@ -163,8 +171,6 @@ public class MenuControlador implements Initializable {
     private Button botonHombre;
     @FXML
     private Button botonMujer;
-    @FXML
-    private Button botonZapatos;
     @FXML
     private Button botonAccesorios;
 
@@ -186,26 +192,34 @@ public class MenuControlador implements Initializable {
     private Label labelUsuario;
 
     @FXML
-    private TextField fieldNombre;
+    private TextField fieldBuscarImagen;
 
     @FXML
     private TextField fieldDescripcion;
 
     @FXML
-    private ComboBox<?> comboCategoria;
+    private TextField fieldImagen;
 
     @FXML
-    private TextField fieldStock;
+    private TextField fieldNombre;
 
     @FXML
     private TextField fieldPrecio;
 
     @FXML
-    private TextField fieldImagen;
+    private TextField fieldStock;
+
+    @FXML
+    private ComboBox<?> comboCategoria;
 
     @FXML
     private ScrollPane scrollCatalogo;
-
+    @FXML
+    private ScrollPane scrollDeseados;
+    @FXML
+    private ScrollPane scrollHistorial;
+    @FXML
+    private ScrollPane scrollCarrito;
     @FXML
     private VBox contenedorCatalogo;
     @FXML
@@ -248,14 +262,14 @@ public class MenuControlador implements Initializable {
     @FXML
     public void agregarProducto() {
 
-        if (fieldNombre.getText().isEmpty() || fieldDescripcion.getText().isEmpty() || comboCategoria.getSelectionModel().getSelectedItem() == null
-                || fieldStock.getText().isEmpty() || fieldPrecio.getText().isEmpty() || fieldImagen.getText().isEmpty() || rutaImagen[0] == null) {
+        if (fieldNombre.getText().isEmpty() || fieldNombre.getText().isEmpty() || fieldNombre.getText().isEmpty()
+                || fieldNombre.getText().isEmpty() || fieldNombre.getText().isEmpty() || rutaImagen[0] == null) {
             Main.mostrarAlerta("Rellene los campos", "Por favor, rellene todos los campos, agregue una imagen e intente nuevamente.", new Alert(Alert.AlertType.ERROR));
         } else {
             try {
 
                 productoAdmin.agregarProducto(new Producto("", fieldNombre.getText(), fieldDescripcion.getText(),
-                        comboCategoria.getSelectionModel().getSelectedItem().toString().toLowerCase(), Integer.parseInt(fieldStock.getText()),
+                        comboCategoria.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(fieldStock.getText()),
                         Double.parseDouble(fieldPrecio.getText()), ""), rutaImagen[0]);
                 mostrarProductosPorCategoria(contenedorAdministrador);
                 fieldNombre.clear();
@@ -266,7 +280,9 @@ public class MenuControlador implements Initializable {
                 fieldPrecio.clear();
                 fieldImagen.clear();
                 Main.mostrarAlerta("Éxito", "Producto guardado correctamente.", new Alert(Alert.AlertType.CONFIRMATION));
-            } catch (IOException ex) { }
+            } catch (IOException ex) {
+                Logger.getLogger(tienda.Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -298,44 +314,15 @@ public class MenuControlador implements Initializable {
     public void pagarProductos(ActionEvent event) {
 
         for (TarjetaCarritoControlador t : tarjetas) {
-            usuario.agregarAHistorial(t.getProducto());
+            if (usuario.agregarAHistorial(t.getProducto())) {
+                Main.mostrarAlerta("Pago Éxitoso", "Su pago se ha realizado con éxito.", new Alert(Alert.AlertType.INFORMATION));
+            }
         }
-        Main.mostrarAlerta("Pago Éxitoso", "Su pago se ha realizado con éxito.", new Alert(Alert.AlertType.INFORMATION));
         usuario.getListaCarrito().limpiar();
         tarjetas.clear();
         usuarioAdmin.guardarUsuarios(listaUsuario);
         mostrarProductosCarrito();
         actualizarTotal();
-        cargarCarritos();
-    }
-
-    @FXML
-    public void vaciarHistorial(ActionEvent event) {
-        try {
-            usuario.getListaHistorial().limpiar();
-            usuarioAdmin.guardarUsuarios(listaUsuario);
-            mostrarProductosHistorial();
-        } catch (Exception err) {
-
-        }
-    }
-
-    @FXML
-    public void agregarTodoACarrito(ActionEvent event) {
-        try {
-            NodoProducto cabeza = usuario.getListaDeseados().getCabeza();
-
-            while (cabeza != null) {
-                if (usuario.agregarACarrito(cabeza.producto)) {
-                    usuarioAdmin.guardarUsuarios(listaUsuario);
-                }
-                cabeza = cabeza.siguiente;
-            }
-            usuario.getListaDeseados().limpiar();
-            mostrarProductosDeseados(contenedorDeseados);
-            cargarDeseados();
-        } catch (Exception err) {
-        }
     }
 
     @FXML
@@ -454,13 +441,6 @@ public class MenuControlador implements Initializable {
     }
 
     @FXML
-    public void seleccionarCategoriaZapatos(ActionEvent event) {
-        Label destino = mapaCategorias.get("zapatos");
-        scrollToNode(scrollCatalogo, destino);
-        aplicarSeleccion(botonZapatos);
-    }
-
-    @FXML
     public void seleccionarCategoriaAccesorios(ActionEvent event) {
         Label destino = mapaCategorias.get("accesorios");
         scrollToNode(scrollCatalogo, destino);
@@ -478,11 +458,7 @@ public class MenuControlador implements Initializable {
         double nodeY = node.getBoundsInParent().getMinY();
 
         // Normalizar posición al rango [0,1]
-        double denom = contentHeight - viewportHeight;
-        if (denom <= 0) {
-            return;
-        }
-        double vValue = nodeY / denom;
+        double vValue = nodeY / (contentHeight - viewportHeight);
         vValue = Math.min(Math.max(vValue, 0), 1); // Limitar entre 0 y 1
 
         // Animar suavemente el scroll
@@ -495,11 +471,11 @@ public class MenuControlador implements Initializable {
 
     private void aplicarSeleccion(Button botonSeleccionado) {
 
-        Button[] botones = {botonHombre, botonMujer, botonZapatos, botonAccesorios};
+        Button[] botones = {botonHombre, botonMujer, botonAccesorios};
         for (Button btn : botones) {
             if (btn == botonSeleccionado) {
-                btn.setStyle("-fx-border-color: transparent transparent #EA4224 transparent;" + "-fx-border-width: 0 0 4 0;"
-                        + "-fx-background-color: transparent;" + "-fx-padding: 5 10 5 10;" + "-fx-text-fill: #EA4224;");
+                btn.setStyle("-fx-border-color: transparent transparent #EB7763 transparent;" + "-fx-border-width: 0 0 4 0;"
+                        + "-fx-background-color: transparent;" + "-fx-padding: 5 10 5 10;" + "-fx-text-fill: #EB7763;");
             } else {
                 btn.setStyle("-fx-background-color: transparent");
             }
@@ -528,7 +504,7 @@ public class MenuControlador implements Initializable {
         FadeTransition animFondo = new FadeTransition(Duration.millis(300), fondoOscuro);
         if (menuAbierto) {
             animFondo.setToValue(0);
-            animFondo.setOnFinished(e -> fondoOscuro.setVisible(false));
+            animFondo.setOnFinished(e -> fondoOscuro.setVisible(false));;
         } else {
             fondoOscuro.setVisible(true);
             animFondo.setToValue(0.6);
@@ -571,7 +547,6 @@ public class MenuControlador implements Initializable {
         double minDistance = Double.MAX_VALUE;
 
         for (Map.Entry<String, Label> entry : mapaCategorias.entrySet()) {
-
             Label label = entry.getValue();
             double labelCenter = label.getBoundsInParent().getMinY() + label.getHeight() / 2;
             double distance = Math.abs(labelCenter - viewportCenter);
@@ -580,29 +555,19 @@ public class MenuControlador implements Initializable {
                 minDistance = distance;
                 categoriaVisible = entry.getKey();
             }
-            if (label.getScene() == null) {
-                continue;
-            }
-            if (label.getHeight() == 0) {
-            }
         }
 
         if (categoriaVisible != null) {
             switch (categoriaVisible.toLowerCase()) {
-                case "hombre" -> {
+                case "hombre":
                     return botonHombre;
-                }
-                case "mujer" -> {
+                case "mujer":
                     return botonMujer;
-                }
-                case "zapatos" -> {
-                    return botonZapatos;
-                }
-                case "accesorios" -> {
+                case "accesorios":
                     return botonAccesorios;
-                }
             }
         }
+
         return null;
     }
 
@@ -673,7 +638,7 @@ public class MenuControlador implements Initializable {
         contenedorHistorial.getChildren().add(contenedorTarjetas);
     }
 
-    public void mostrarProductosCarrito() {
+    private void mostrarProductosCarrito() {
         tarjetas.clear();
 
         contenedorCarrito.getChildren().clear();
@@ -694,7 +659,6 @@ public class MenuControlador implements Initializable {
     }
 
     private void mostrarProductosPorCategoria(VBox contenedorCatalogo) throws IOException {
-        mapaCategorias.clear();
         tarjetasProducto.clear();
         ListaProducto lista = productoAdmin.cargarProductos();
         String titulo = "";
@@ -804,8 +768,8 @@ public class MenuControlador implements Initializable {
         while (actual != null) {
             Producto p = actual.producto;
 
-            String nombre = p.getNombre() == null ? "" : p.getNombre().toLowerCase();
-            String categoria = p.getCategoria() == null ? "" : p.getCategoria().toLowerCase();
+            String nombre = p.getNombre().toLowerCase();
+            String categoria = p.getCategoria().toLowerCase();
 
             // 4. Si coincide agrega tarjeta
             if (nombre.contains(filtro)
@@ -898,8 +862,6 @@ public class MenuControlador implements Initializable {
 
             // IMPORTANTE: registrar esta tarjeta
             tarjetas.add(controller);
-
-            controller.setMenu_c(this);
             controller.setOnCantidadCambiada(() -> {
                 actualizarTotal();
             });
@@ -911,7 +873,7 @@ public class MenuControlador implements Initializable {
         }
     }
 
-    public void actualizarTotal() {
+    private void actualizarTotal() {
         double total = calcularTotal();
 
         if (total <= 0) {
@@ -941,16 +903,6 @@ public class MenuControlador implements Initializable {
                 tp.ponerEnDeseado();
             } else {
                 tp.ponerEnNoDeseado();
-            }
-        }
-    }
-
-    public void cargarCarritos() {
-        for (TarjetaProductoControlador tp : tarjetasProducto) {
-            if (usuario.getListaCarrito().existeProducto(tp.getProducto().getId())) {
-                tp.ponerEnCarrito();
-            } else {
-                tp.ponerEnNoCarrito();
             }
         }
     }

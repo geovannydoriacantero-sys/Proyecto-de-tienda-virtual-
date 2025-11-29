@@ -139,28 +139,11 @@ public class LoginControlador implements Initializable {
             Main.mostrarAlerta("Informacion", "Por favor, rellene todos los campos vacíos.", new Alert(Alert.AlertType.INFORMATION));
             return;
         }
-        if(fieldNombreRegistro.getText().length() < 2) {
-            Main.mostrarAlerta("Informacion", "Por favor, utilize una nombre mínimo de 3 digitos.", new Alert(Alert.AlertType.INFORMATION));
-            fieldCorreoRegistro.requestFocus();
-            return;
-        }
-        
-        if(!validarCorreo(fieldCorreoRegistro.getText())) {
-            Main.mostrarAlerta("Informacion", "Por favor, utilize un correo válido.", new Alert(Alert.AlertType.INFORMATION));
-            fieldCorreoRegistro.requestFocus();
-            return;
-        }
-        if(!validarContrasena(fieldContrasenaRegistro.getText())) {
-            Main.mostrarAlerta("Informacion", "Por favor, utilize una contraseña mínimo de 6 digitos.", new Alert(Alert.AlertType.INFORMATION));
-            fieldContrasenaRegistro.setText("");
-            fieldContrasenaRegistro.requestFocus();
-            return;
-        }
 
         Usuario nuevoUsuario = new Usuario(fieldNombreRegistro.getText(), fieldCorreoRegistro.getText(), fieldContrasenaRegistro.getText());
 
         if (listaUsuarios.agregarUsuario(nuevoUsuario)) {
-            // Guardar automáticamente en usuarios
+            // Guardar automáticamente en usuarios.txt
             user_admin.agregarUsuario(nuevoUsuario);
             Main.mostrarAlerta("Registro exitoso", "Usuario registrado correctamente.", new Alert(Alert.AlertType.INFORMATION));
             label1.setVisible(true);
@@ -173,12 +156,5 @@ public class LoginControlador implements Initializable {
         } else {
             Main.mostrarAlerta("Error", "No se puede utilizar este correo porque ya está registrado.", new Alert(Alert.AlertType.ERROR));
         }
-    }
-    
-    private boolean validarCorreo(String correo) {
-        return correo.matches("[\\w.%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-    }  
-    private boolean validarContrasena(String contrasena) {
-        return contrasena.matches(".{6,}");
     }
 }
