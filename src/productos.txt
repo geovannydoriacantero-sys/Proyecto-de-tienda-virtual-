@@ -1,0 +1,20 @@
+P0001;Vaqueros Azules;Sientete cómodo.;hombre;5;90000,00;images/P0001.png
+P0002;Sueter de Rayas;Protegete del frio.;hombre;3;40000,00;images/P0002.jpg
+P0003;Buso;Protegete del sol.;hombre;15;120000,00;images/P0003.jpg
+P0004;Blusa Verde;Tela de lino.;mujer;20;80000,00;images/P0004.jpg
+P0005;Vestido Rojo;Elegante.;mujer;13;230000,00;images/P0005.jpg
+P0006;Vestido Rosa;Brilla.;mujer;1;170000,00;images/P0006.jpg
+P0007;Botas Vélez;Cómodidad en tus pies.;zapatos;4;220000,00;images/P0007.jpg
+P0008;Bincha Negra;Buena y cómoda en tu cabeza.;accesorios;40;9000,00;images/P0008.jpg
+P0009;Reloj Lujoso;Estilo.;accesorios;5;1480000,00;images/P0009.jpg
+P0010;Cadena Oro Blanco;Lucete.;accesorios;10;480000,00;images/P0010.jpg
+P0011;Gafas Oscuras;;Accesorios;20;34000,00;images/P0011.jpg
+P0012;Tacones Negro;Sientete alta.;zapatos;12;97000,00;images/P0012.jpg
+P0013;Tacones Blanco;Altitud.;zapatos;15;23000,00;images/P0013.jpg
+P0014;Zapatos Blancos Deportivos;Lúcete.;zapatos;7;134000,00;images/P0014.jpg
+P0015;Zapatos Formales;Elegante.;zapatos;10;230000,00;images/P0015.jpg
+P0016;Jeans Ázules;Ajustados.;mujer;8;78000,00;images/P0016.jpg
+P0017;Blusa Blanca;Suave.;mujer;20;40000,00;images/P0017.jpg
+P0018;Camiseta Gris;Perfecta.;hombre;12;120000,00;images/P0018.jpg
+P0019;Vestido Polka Noir;Excelente.;mujer;12;135000,00;images/P0019.jpg
+P0020;Vestido Rosa;Lúcete.;mujer;3;134000,00;images/P0020.jpg
