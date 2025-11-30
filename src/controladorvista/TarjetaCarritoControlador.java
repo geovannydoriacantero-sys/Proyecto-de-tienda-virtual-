@@ -18,11 +18,10 @@ public class TarjetaCarritoControlador implements Initializable {
 
     private Usuario usuario;
     private ListaUsuario listaUsuarios;
-    private UsuarioAdministrador usuarioAdmin;
     private Producto producto;
-
-    private Runnable listener;
-
+    
+    private MenuControlador menu_c;
+    
     private int cantidad;
 
     @FXML
@@ -36,12 +35,11 @@ public class TarjetaCarritoControlador implements Initializable {
     @FXML
     private Label labelUnidad;
 
-    public void setOnCantidadCambiada(Runnable r) {
-        this.listener = r;
+    public void setMenu_c(MenuControlador menu_c) {
+        this.menu_c = menu_c;
     }
 
     public void setUsuarioAdmin(UsuarioAdministrador usuarioAdmin) {
-        this.usuarioAdmin = usuarioAdmin;
     }
 
     public void setListaUsuarios(ListaUsuario listaUsuarios) {
@@ -55,7 +53,7 @@ public class TarjetaCarritoControlador implements Initializable {
     public int getCantidad() {
         try {
             return Integer.parseInt(labelUnidad.getText());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             return 1;
         }
     }
@@ -66,7 +64,7 @@ public class TarjetaCarritoControlador implements Initializable {
         // Inicializar cantidad con la cantidad real del carrito
         this.cantidad = p.getCantidadCarrito();
         labelUnidad.setText("" + this.cantidad);
-        
+
         labelNombre.setText(p.getNombre());
         labelCantidad.setText("x" + p.getStock());
         labelPrecio.setText("$ " + p.getPrecio());
@@ -80,16 +78,15 @@ public class TarjetaCarritoControlador implements Initializable {
     }
 
     @FXML
-    public void sumarProducto(ActionEvent e) {
+    protected void sumarProducto(ActionEvent e) {
         try {
             cantidad = Integer.parseInt(labelUnidad.getText());
             if (cantidad < producto.getStock()) {
                 cantidad++;
                 labelUnidad.setText("" + cantidad);
                 producto.setCantidadCarrito(cantidad); // actualizar en el producto
-                if (listener != null) {
-                    listener.run();
-                }
+                
+                menu_c.actualizarTotal();
             }
         } catch (NumberFormatException err) {
             System.out.println("Error: " + err);
@@ -98,20 +95,30 @@ public class TarjetaCarritoControlador implements Initializable {
     }
 
     @FXML
-    public void restarProducto(ActionEvent e) {
+    protected void restarProducto(ActionEvent e) {
         try {
             cantidad = Integer.parseInt(labelUnidad.getText());
             if (cantidad > 1) {
                 cantidad--;
                 labelUnidad.setText("" + cantidad);
                 producto.setCantidadCarrito(cantidad); // actualizar en el producto
-                if (listener != null) {
-                    listener.run();
-                }
+                 menu_c.actualizarTotal();
             }
         } catch (NumberFormatException err) {
             System.out.println("Error: " + err);
         }
+    }
+    
+    @FXML
+    protected void eliminarProductoCarrito(ActionEvent event) {
+        usuario.getListaCarrito().eliminarProducto(producto.getId());
+        listaUsuarios.agregarUsuario(usuario);
+        menu_c.mostrarProductosCarrito();
+        menu_c.actualizarTotal();
+        menu_c.cargarCarritos();
+    }
+
+    public void setOnCantidadCambiada(Runnable r) {
     }
 
     @Override

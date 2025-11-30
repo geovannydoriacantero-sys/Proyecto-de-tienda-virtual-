@@ -9,6 +9,8 @@ public class Producto {
     private int stock;
     private double precio;
     private String rutaImagen;
+    
+    private int cantidadCarrito = 1; // Por defecto 1
 
     public Producto(String id, String nombre, String descripcion, String categoria, int stock, double precio, String rutaImagen) {
         this.id = id;
@@ -47,8 +49,6 @@ public class Producto {
     public String getRutaImagen() {
         return rutaImagen;
     }
-
-    private int cantidadCarrito = 1; // Por defecto 1
 
     public int getCantidadCarrito() {
         return cantidadCarrito;

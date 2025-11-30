@@ -55,6 +55,7 @@ public class Usuario {
 
     public boolean agregarACarrito(Producto p) {
         if (listaCarrito.existeProducto(p.getId())) {
+            listaCarrito.eliminarProducto(p.getId());
             return false;
         }
         listaCarrito.agregarProducto(p);

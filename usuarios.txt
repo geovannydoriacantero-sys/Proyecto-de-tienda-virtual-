@@ -1,2 +1,1 @@
 Administrador;admin10@gmail.com;admin2025;;;
-geovanny;geovanny@gmail.com;geovanny2006;P0010,P0009;P0010,P0009;P0008,P0001,P0002,P0015
