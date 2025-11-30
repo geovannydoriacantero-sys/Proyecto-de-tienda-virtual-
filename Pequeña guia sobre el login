@@ -1,8 +1,171 @@
-para inciar en el programa que hemos desarrollado lo primero que deben hacer es:
-si no estan registrados deben oprimir donde dice registrar alli deben colocar nombre,correo y contraseña 
-una ves colocado oprimen registrar. al momento de registrarte te va a salir un pequeño aviso 
-despues te diriges donde dice iniciar sesión lo oprimes y colocas el correo y contraseña con la que te registraste 
-esto te llevara de inmediato al inicio que seria el catálogo 
-en el catálogo podras encontrar lo que hay en la aplicación 
-esta dividido en secciones que serian: hombres, mujeres, calzado y accesorios 
-al oprimir eso te llevara y mostrara todo lo relacionado con ello
+1. Introducción
+
+ShopFX es una aplicación diseñada para gestionar una tienda virtual de productos generales.
+El sistema permite al usuario visualizar productos, gestionar su cuenta, revisar compras anteriores y realizar pedidos de manera fácil e intuitiva.
+
+Este manual explica detalladamente el uso del programa y sus funcionalidades principales.
+
+El sistema cargará automáticamente la pantalla de login.
+
+4. Pantalla de Login
+
+Al iniciar la aplicación, el usuario debe autenticarse para acceder a las funcionalidades del sistema.
+
+Campos de ingreso
+
+Correo electrónico:
+
+Debe tener formato válido (ejemplo@correo.com
+)
+
+Contraseña:
+
+Oculta mientras se escribe
+
+Validaciones
+
+El sistema mostrará mensajes si ocurre alguna de estas situaciones:
+
+“ Debes llenar todos los campos.”
+
+“ Correo inválido.”
+
+Botón “Iniciar sesión”
+
+Permite acceder al sistema si los datos son correctos.
+
+¿Olvidaste la contraseña?
+
+Opción disponible para iniciar el proceso de recuperación (según implementación).
+
+5. Menú Principal
+
+Después del login, se muestra el menú principal del sistema.
+
+Desde aquí el usuario puede acceder a:
+
+Catálogo de productos
+
+Carrito de compras
+
+Lista de deseos
+
+Historial de compras
+
+Perfil de usuario
+
+Cerrar sesión
+
+6. Catálogo de Productos
+
+El catálogo permite ver todos los productos disponibles en la tienda.
+
+Elementos principales
+
+Barra de búsqueda:
+Sirve para filtrar productos escribiendo su nombre.
+
+Listado de productos:
+Cada tarjeta incluye:
+
+Imagen
+
+Nombre
+
+Precio
+icono de carrito de comprar
+icono de lista de deseos
+
+Navegación
+
+Botón “inicio” para volver al catálogo.
+
+6. Carrito de Compras
+
+El carrito de compras almacena los productos seleccionados por el usuario para su compra.
+
+Cómo acceder
+
+Desde el menú principal (opción “Carrito”).
+
+Desde el icono 🛒 en la interfaz.
+
+Elementos del carrito
+
+Cada producto muestra:
+
+Imagen del producto
+
+Nombre
+
+Precio por unidad
+
+Cantidad (editable)
+
+Subtotal
+
+Botón Eliminar
+
+Al final aparece:
+
+Subtotal general
+
+Total
+
+Botón Pagar
+
+Funciones principales
+
+Modificar cantidad
+
+Con botones (+) o (–)
+
+O ingresando un número directamente
+
+Eliminar un producto
+
+Finalizar compra
+
+Presionar Pagar
+
+Mensajes importantes
+
+“Tu carrito está vacío”
+
+
+7. Lista de Deseos
+
+Permite guardar productos para revisarlos o comprarlos más tarde.
+
+Funciones
+
+Agregar productos desde el catálogo 
+
+Ver todos los productos guardados
+
+Eliminar productos de la lista
+
+Pasar productos al carrito
+
+8. Historial de Compras
+
+Muestra todas las compras realizadas por el usuario.
+
+Productos adquiridos
+nombre del producto
+Precio
+vaciar el historial
+
+9. Perfil de Usuario
+Incluye:
+boton cerrar secion
+salir
+
+10. Perfil de Administrador
+se accede con lo siguiente:
+admin10@gmail.com
+admin2025
+permite:
+agregar productos 
+para esto hay que llenar todo lo que se pide alli
+y tambien se puede salir y cerrar secion
