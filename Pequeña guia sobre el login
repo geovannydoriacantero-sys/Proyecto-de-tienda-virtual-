@@ -7,7 +7,7 @@ Este manual explica detalladamente el uso del programa y sus funcionalidades pri
 
 El sistema cargará automáticamente la pantalla de login.
 
-4. Pantalla de Login
+2. Pantalla de Login
 
 Al iniciar la aplicación, el usuario debe autenticarse para acceder a las funcionalidades del sistema.
 
@@ -38,7 +38,7 @@ Permite acceder al sistema si los datos son correctos.
 
 Opción disponible para iniciar el proceso de recuperación (según implementación).
 
-5. Menú Principal
+3. Menú Principal
 
 Después del login, se muestra el menú principal del sistema.
 
@@ -56,7 +56,7 @@ Perfil de usuario
 
 Cerrar sesión
 
-6. Catálogo de Productos
+4. Catálogo de Productos
 
 El catálogo permite ver todos los productos disponibles en la tienda.
 
@@ -80,7 +80,7 @@ Navegación
 
 Botón “inicio” para volver al catálogo.
 
-6. Carrito de Compras
+5. Carrito de Compras
 
 El carrito de compras almacena los productos seleccionados por el usuario para su compra.
 
@@ -133,7 +133,7 @@ Mensajes importantes
 “Tu carrito está vacío”
 
 
-7. Lista de Deseos
+6. Lista de Deseos
 
 Permite guardar productos para revisarlos o comprarlos más tarde.
 
@@ -147,7 +147,7 @@ Eliminar productos de la lista
 
 Pasar productos al carrito
 
-8. Historial de Compras
+7. Historial de Compras
 
 Muestra todas las compras realizadas por el usuario.
 
@@ -156,12 +156,12 @@ nombre del producto
 Precio
 vaciar el historial
 
-9. Perfil de Usuario
+8. Perfil de Usuario
 Incluye:
 boton cerrar secion
 salir
 
-10. Perfil de Administrador
+9. Perfil de Administrador
 se accede con lo siguiente:
 admin10@gmail.com
 admin2025
